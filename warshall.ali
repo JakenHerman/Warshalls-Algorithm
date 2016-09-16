@@ -1,0 +1,98 @@
+V "GNAT Lib v2016"
+M P W=b
+P SS ZX
+
+RN
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U warshall%b		warshall.adb		4f4aa3ef NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+Z ada.text_io.integer_aux%s  a-tiinau.adb	a-tiinau.ali
+W ada.text_io.integer_io%s
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.val_int%s	s-valint.adb		s-valint.ali
+
+D ada.ads		20160516092928 3ffc8e18 ada%s
+D a-except.ads		20160516092928 291912d5 ada.exceptions%s
+D a-ioexce.ads		20160516092927 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20160516092929 119b8fb3 ada.streams%s
+D a-tags.ads		20160516092932 01f5e3ef ada.tags%s
+D a-textio.ads		20160516092932 386df5d4 ada.text_io%s
+D a-tiinau.ads		20160516092930 8114c8e4 ada.text_io.integer_aux%s
+D a-tiinio.ads		20160516092928 aa04e5d6 ada.text_io.integer_io%s
+D a-tiinio.adb		20160516092930 df9cd7af ada.text_io.integer_io%b
+D a-unccon.ads		20160516092931 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20160516092928 5ab55268 interfaces%s
+D i-cstrea.ads		20160516092927 e53d8b8e interfaces.c_streams%s
+D system.ads		20160516092931 c3282aa7 system%s
+D s-crtl.ads		20160516092927 0ebbdb71 system.crtl%s
+D s-exctab.ads		20160516092931 54135002 system.exception_table%s
+D s-ficobl.ads		20160516092933 078245e4 system.file_control_block%s
+D s-imgint.ads		20160516092928 02dbe0c2 system.img_int%s
+D s-parame.ads		20160516092932 7e2a0d7f system.parameters%s
+D s-secsta.ads		20160516092931 86a2856d system.secondary_stack%s
+D s-soflin.ads		20160516092929 14e1eb6c system.soft_links%s
+D s-stache.ads		20160516092932 a37c21ec system.stack_checking%s
+D s-stalib.ads		20160516092931 09bd3940 system.standard_library%s
+D s-stoele.ads		20160516092932 2dc34a04 system.storage_elements%s
+D s-traent.ads		20160516092928 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20160516092930 34867c83 system.unsigned_types%s
+D s-valint.ads		20160516092930 48a52a3f system.val_int%s
+D s-wchcon.ads		20160516092931 1b7d22d2 system.wch_con%s
+D warshall.adb		20160916161918 7727563b warshall%b
+X 1 ada.ads
+16K9*Ada 19e8 28|1r6 2r5 4r23 10r14 14r7 15r32 19r30 25r7 31r11 56r4 57r30
+. 61r14 63r27 78r4
+X 6 a-textio.ads
+49K13*Text_IO 471e16 28|1w10 2r9 4r27 10r18 14r11 15r36 19r34 25r11 31r15
+. 56r8 57r34 61r18 63r31 78r8
+52P9*File_Type 28|10r26 31r23
+53n23*In_File{53E9} 28|15r44 57r42
+92U14*Open 28|14s19 56s16
+93p7 File{52P9} 28|14r24 56r22
+94e7 Mode{53E9} 28|15r24 57r22
+95a7 Name{string} 28|16r24 58r22
+98U14*Close 28|25s19 78s16
+166U14*New_Line 28|96s7
+183V13*End_Of_File{boolean} 28|61s26
+242U14*Put 28|80s4 84s7 97s7 97s30 100s13 102s13
+253V13*Get_Line{string} 28|19s42 63s39
+X 8 a-tiinio.ads
+46k21*Integer_IO 85e27 28|4r35
+X 28 warshall.adb
+3U11*Warshall 3b11 106t4
+4K12 Iio[8|46] 5r8
+8V13 Get_Size{integer} 8b13 27l8 27t16 39s27
+9a7 Filename{string} 16r32
+10p7 File{6|52P9} 14m32 14r32 19r52 25m26 25r26
+11i7 Line_Count{integer} 17r13 22m13
+12i7 ReturnSize{integer} 21m13 26r14
+19a13 Line{string} 21r41
+30a4 Filename{string} 58r30
+31p4 File{6|52P9} 56m30 56r30 61r39 63r49 78m23 78r23
+34i4 X_Or_Y{integer} 65r13 67m13 68r16 70m13 74m13
+37i4 User_X{integer} 69m13 73r19
+38i4 User_Y{integer} 72m13 73r27
+39i4 User_Size{integer} 42r20 42r36 66m13 83r16 85r19 87r25 95r16 98r19
+42a4 M(integer) 51m7 86r13 88m16 88r26 88r35 99r13
+46U14 First 46b14 47>21 48>21 52t7 73s13
+47i21 X{integer} 51r9
+48i21 Y{integer} 51r12
+63a10 Line{string} 66r40 69r37 72r37
+83i8 I{integer} 84r25 86r17 88r37
+85i11 J{integer} 86r15 88r18 88r28
+87i17 K{integer} 88r20 88r30 88r39
+95i8 I{integer} 97r25 99r15
+98i11 J{integer} 99r17
+

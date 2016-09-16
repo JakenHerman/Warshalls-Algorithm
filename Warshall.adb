@@ -37,7 +37,7 @@ procedure Warshall is
    User_X : Integer;
    User_Y : Integer;
    User_Size : Integer := Get_Size;
-   
+
    --Integer Array needs conversion to generic type
    M : array (1 .. User_Size, 1 .. User_Size) of Integer := (others => (others => 0));
 
@@ -77,8 +77,11 @@ begin
    end loop;
    Ada.Text_IO.Close (File);
 
+   Put("  "); --set up top label
+
    --Warshall's algorithm
    for I in 1..User_Size loop
+      Put(Integer'Image(I));
       for J in 1..User_Size loop
          if M(J,I) > 0 then
             for K in 1..User_Size loop
@@ -91,6 +94,7 @@ begin
    --print the adjacency matrix.
    for I in 1..User_Size loop
       New_Line;
+      Put(Integer'Image(I)); Put(" ");
       for J in 1..User_Size loop
          if M(I,J) > 0 then
             Put("1 ");
