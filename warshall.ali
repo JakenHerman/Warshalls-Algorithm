@@ -3,6 +3,7 @@ M P W=b
 P SS ZX
 
 RN
+RV NO_ENUMERATION_MAPS
 RV NO_EXCEPTION_HANDLERS
 RV NO_EXCEPTIONS
 RV NO_IO
@@ -12,15 +13,21 @@ RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV SPARK_05
 
-U warshall%b		warshall.adb		4f4aa3ef NE OO SU
+U warshall%b		warshall.adb		8d5799ba NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+Z ada.text_io.enumeration_aux%s  a-tienau.adb	a-tienau.ali
+W ada.text_io.enumeration_io%s
 Z ada.text_io.integer_aux%s  a-tiinau.adb	a-tiinau.ali
 W ada.text_io.integer_io%s
+W interfaces%s		interfac.ads		interfac.ali
+W system%s		system.ads		system.ali
+W system.img_enum_new%s	s-imenne.adb		s-imenne.ali
 W system.img_int%s	s-imgint.adb		s-imgint.ali
 W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.val_enum%s	s-valenu.adb		s-valenu.ali
 W system.val_int%s	s-valint.adb		s-valint.ali
 
 D ada.ads		20160516092928 3ffc8e18 ada%s
@@ -29,6 +36,9 @@ D a-ioexce.ads		20160516092927 e4a01f64 ada.io_exceptions%s
 D a-stream.ads		20160516092929 119b8fb3 ada.streams%s
 D a-tags.ads		20160516092932 01f5e3ef ada.tags%s
 D a-textio.ads		20160516092932 386df5d4 ada.text_io%s
+D a-tienau.ads		20160516092928 6a9c157b ada.text_io.enumeration_aux%s
+D a-tienio.ads		20160516092928 fc618ae6 ada.text_io.enumeration_io%s
+D a-tienio.adb		20160516092930 c9e6b5af ada.text_io.enumeration_io%b
 D a-tiinau.ads		20160516092930 8114c8e4 ada.text_io.integer_aux%s
 D a-tiinio.ads		20160516092928 aa04e5d6 ada.text_io.integer_io%s
 D a-tiinio.adb		20160516092930 df9cd7af ada.text_io.integer_io%b
@@ -39,6 +49,7 @@ D system.ads		20160516092931 c3282aa7 system%s
 D s-crtl.ads		20160516092927 0ebbdb71 system.crtl%s
 D s-exctab.ads		20160516092931 54135002 system.exception_table%s
 D s-ficobl.ads		20160516092933 078245e4 system.file_control_block%s
+D s-imenne.ads		20160516092929 614c06c0 system.img_enum_new%s
 D s-imgint.ads		20160516092928 02dbe0c2 system.img_int%s
 D s-parame.ads		20160516092932 7e2a0d7f system.parameters%s
 D s-secsta.ads		20160516092931 86a2856d system.secondary_stack%s
@@ -48,51 +59,60 @@ D s-stalib.ads		20160516092931 09bd3940 system.standard_library%s
 D s-stoele.ads		20160516092932 2dc34a04 system.storage_elements%s
 D s-traent.ads		20160516092928 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20160516092930 34867c83 system.unsigned_types%s
+D s-valenu.ads		20160516092931 bb1a4295 system.val_enum%s
 D s-valint.ads		20160516092930 48a52a3f system.val_int%s
 D s-wchcon.ads		20160516092931 1b7d22d2 system.wch_con%s
-D warshall.adb		20160916161918 7727563b warshall%b
+D warshall.adb		20160920022425 b53a6c6e warshall%b
 X 1 ada.ads
-16K9*Ada 19e8 28|1r6 2r5 4r23 10r14 14r7 15r32 19r30 25r7 31r11 56r4 57r30
-. 61r14 63r27 78r4
+16K9*Ada 19e8 33|1r6 2r5 6r24 7r23 14r14 18r7 19r32 23r30 29r7 35r11 60r4
+. 61r30 64r14 66r27 81r4
 X 6 a-textio.ads
-49K13*Text_IO 471e16 28|1w10 2r9 4r27 10r18 14r11 15r36 19r34 25r11 31r15
-. 56r8 57r34 61r18 63r31 78r8
-52P9*File_Type 28|10r26 31r23
-53n23*In_File{53E9} 28|15r44 57r42
-92U14*Open 28|14s19 56s16
-93p7 File{52P9} 28|14r24 56r22
-94e7 Mode{53E9} 28|15r24 57r22
-95a7 Name{string} 28|16r24 58r22
-98U14*Close 28|25s19 78s16
-166U14*New_Line 28|96s7
-183V13*End_Of_File{boolean} 28|61s26
-242U14*Put 28|80s4 84s7 97s7 97s30 100s13 102s13
-253V13*Get_Line{string} 28|19s42 63s39
-X 8 a-tiinio.ads
-46k21*Integer_IO 85e27 28|4r35
-X 28 warshall.adb
-3U11*Warshall 3b11 106t4
-4K12 Iio[8|46] 5r8
-8V13 Get_Size{integer} 8b13 27l8 27t16 39s27
-9a7 Filename{string} 16r32
-10p7 File{6|52P9} 14m32 14r32 19r52 25m26 25r26
-11i7 Line_Count{integer} 17r13 22m13
-12i7 ReturnSize{integer} 21m13 26r14
-19a13 Line{string} 21r41
-30a4 Filename{string} 58r30
-31p4 File{6|52P9} 56m30 56r30 61r39 63r49 78m23 78r23
-34i4 X_Or_Y{integer} 65r13 67m13 68r16 70m13 74m13
-37i4 User_X{integer} 69m13 73r19
-38i4 User_Y{integer} 72m13 73r27
-39i4 User_Size{integer} 42r20 42r36 66m13 83r16 85r19 87r25 95r16 98r19
-42a4 M(integer) 51m7 86r13 88m16 88r26 88r35 99r13
-46U14 First 46b14 47>21 48>21 52t7 73s13
-47i21 X{integer} 51r9
-48i21 Y{integer} 51r12
-63a10 Line{string} 66r40 69r37 72r37
-83i8 I{integer} 84r25 86r17 88r37
-85i11 J{integer} 86r15 88r18 88r28
-87i17 K{integer} 88r20 88r30 88r39
-95i8 I{integer} 97r25 99r15
-98i11 J{integer} 99r17
+49K13*Text_IO 471e16 33|1w10 2r9 6r28 7r27 14r18 18r11 19r36 23r34 29r11
+. 35r15 60r8 61r34 64r18 66r31 81r8
+52P9*File_Type 33|14r26 35r23
+53n23*In_File{53E9} 33|19r44 61r42
+92U14*Open 33|18s19 60s16
+93p7 File{52P9} 33|18r24 60r22
+94e7 Mode{53E9} 33|19r24 61r22
+95a7 Name{string} 33|20r24 62r22
+98U14*Close 33|29s19 81s16
+166U14*New_Line 33|99s7
+183V13*End_Of_File{boolean} 33|64s26
+242U14*Put 33|83s4 87s7 100s7 100s30 103s13 105s13
+253V13*Get_Line{string} 33|23s42 66s39
+X 8 a-tienio.ads
+26k21*Enumeration_IO 55e31 33|6r36
+X 11 a-tiinio.ads
+46k21*Integer_IO 85e27 33|7r35
+X 33 warshall.adb
+3U11*Warshall 3b11 109t4
+5E9 data_type 5e42 6r51
+5n23 int{5E9}
+5n28 str{5E9}
+5n33 chr{5E9}
+5n38 flt{5E9}
+6K12 dtio[8|26] 9r8
+7K12 Iio[11|46] 8r8
+12V13 get_size{integer} 12b13 31l8 31t16 43s27
+13a7 Filename{string} 20r32
+14p7 File{6|52P9} 18m32 18r32 23r51 29m26 29r26
+15i7 Line_Count{integer} 21r13 26m13
+16i7 ReturnSize{integer} 25m13 30r14
+23a13 Line{string} 25r41
+34a4 Filename{string} 62r30
+35p4 File{6|52P9} 60m30 60r30 64r39 66r49 81m23 81r23
+38i4 X_Or_Y{integer} 68r13 70m13 71r16 73m13 77m13
+41i4 User_X{integer} 72m13 76r19
+42i4 User_Y{integer} 75m13 76r27
+43i4 User_Size{integer} 46r20 46r36 69m13 86r16 88r19 90r25 98r16 101r19
+46a4 M(integer) 55m7 89r13 91m16 91r26 91r35 102r13
+50U14 First 50b14 51>21 52>21 56t7 76s13
+51i21 X{integer} 55r9
+52i21 Y{integer} 55r12
+66a10 Line{string} 69r40 72r37 75r37
+86i8 I{integer} 87r25 89r17 91r37
+88i11 J{integer} 89r15 91r18 91r28
+90i17 K{integer} 91r20 91r30 91r39
+98i8 I{integer} 100r25 102r15
+101i11 J{integer} 102r17
 

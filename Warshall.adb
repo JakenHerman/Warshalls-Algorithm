@@ -1,11 +1,15 @@
 with Ada.Text_Io;
 use Ada.Text_Io;
 procedure Warshall is
+
+   type data_type is (int, str, chr, flt);
+   package dtio is new Ada.Text_IO.Enumeration_IO(data_type);
    package Iio is new Ada.Text_Io.Integer_Io(Integer);
    use Iio;
+   use dtio;
 
    --Get_Size allows the txt file to specify how much space to allocate.
-   function Get_Size return Integer  is
+   function get_size return Integer  is
       Filename : String := "win.txt";
       File : Ada.Text_IO.File_Type;
       Line_Count : Integer := 0;
@@ -16,7 +20,7 @@ procedure Warshall is
                        Name => Filename);
       while Line_Count /= 1 loop
          declare
-            Line : String := Ada.Text_IO.Get_Line (File);
+            Line : String := Ada.Text_IO.Get_Line(File);
          begin
             ReturnSize := Integer'Value(Line);
             Line_Count := 1;
@@ -24,7 +28,7 @@ procedure Warshall is
       end loop;
       Ada.Text_IO.Close (File);
       return ReturnSize;
-   end Get_Size;
+   end get_size;
 
    --Create variables  to set up file i/o
    Filename : String := "win.txt";
@@ -36,7 +40,7 @@ procedure Warshall is
    --Create variables for X and Y to be set by user.
    User_X : Integer;
    User_Y : Integer;
-   User_Size : Integer := Get_Size;
+   User_Size : Integer := get_size;
 
    --Integer Array needs conversion to generic type
    M : array (1 .. User_Size, 1 .. User_Size) of Integer := (others => (others => 0));
@@ -56,7 +60,6 @@ begin
    Ada.Text_IO.Open (File => File,
                      Mode => Ada.Text_IO.In_File,
                      Name => Filename);
-
 
    while not Ada.Text_IO.End_Of_File (File) loop
       declare
