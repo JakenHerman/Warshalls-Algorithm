@@ -3,82 +3,109 @@ use Ada.Text_Io;
 procedure Warshall is
 
    type data_type is (int, str, chr, flt);
-   package dtio is new Ada.Text_IO.Enumeration_IO(data_type);
-   package Iio is new Ada.Text_Io.Integer_Io(Integer);
+   package dtio is new Enumeration_IO(data_type);
+   package Iio is new Integer_Io(Integer);
    use Iio;
    use dtio;
 
    --Get_Size allows the txt file to specify how much space to allocate.
    function get_size return Integer  is
-      Filename : String := "win.txt";
-      File : Ada.Text_IO.File_Type;
+      Filename : String := "win25.txt";
+      File : File_Type;
       Line_Count : Integer := 0;
       ReturnSize : Integer;
    begin
-      Ada.Text_IO.Open(File => File,
-                       Mode => Ada.Text_IO.In_File,
+      Open(File => File,
+                       Mode => In_File,
                        Name => Filename);
       while Line_Count /= 1 loop
          declare
-            Line : String := Ada.Text_IO.Get_Line(File);
+            Line : String := Get_Line(File);
          begin
             ReturnSize := Integer'Value(Line);
             Line_Count := 1;
          end;
       end loop;
-      Ada.Text_IO.Close (File);
+      Close (File);
       return ReturnSize;
    end get_size;
 
    --Create variables  to set up file i/o
-   Filename : String := "win.txt";
-   File : Ada.Text_IO.File_Type;
+   Filename : String := "winchr.txt";
+   File : File_Type;
 
    --Control x/y on file read
    X_Or_Y : Integer := 99;
 
    --Create variables for X and Y to be set by user.
-   User_X : Integer;
-   User_Y : Integer;
+   User_X : Character;
+   User_Y : Character;
    User_Size : Integer := get_size;
+   T_X : Integer;
+   T_Y : Integer;
 
    --Integer Array needs conversion to generic type
    M : array (1 .. User_Size, 1 .. User_Size) of Integer := (others => (others => 0));
+   T_array : array (1 .. User_Size) of Character;
 
    -- "First" allows the user to create edges between
    -- vertices.
    procedure First (
-                    X : in     Integer;
-                    Y : in     Integer) is
+                    X : in     Character;
+                    Y : in     Character) is
    begin
+      --does x exist?
+      for i in 1 .. user_size loop
+         for j in 1 .. user_size+1 loop
+             if T_array(j) = X then
+                --if so, get location
+                T_X := j;
+             end if;
+         end loop;
+         --if not, add to T_array, set location
+         T_array(i) := X;
+      end loop;
+
+      --does y exist?    
+      for i in 1 .. user_size loop
+         for j in 1 .. user_size+1 loop
+             if T_array(j) = Y then
+                --if so, get location
+                T_Y := j;
+             end if;
+         end loop;
+         --if not, add to T_array, set location
+         T_array(i) := Y;
+      end loop;
+
       --This coordinate needs to be "1" because the node exists
-      M(X, Y) := 1;
+      M(T_X, T_Y) := 1;
    end;
 
 --begin "Warshall".
 begin
-   Ada.Text_IO.Open (File => File,
-                     Mode => Ada.Text_IO.In_File,
+   Open (File => File,
+                     Mode => In_File,
                      Name => Filename);
 
-   while not Ada.Text_IO.End_Of_File (File) loop
+   while not End_Of_File (File) loop
       declare
-         Line : String := Ada.Text_IO.Get_Line (File);
+         Line : String := Get_Line (File);
       begin
          if X_Or_Y = 99 then
             User_Size := Integer'Value(Line);
             X_Or_Y := 0;
          elsif X_Or_Y = 0 then
-            User_X := Integer'Value(Line);
+            User_X := line(1);
             X_Or_Y := 1;
          else
-            User_Y := Integer'Value(Line);
+            User_Y := line(1);
             First(User_X, User_Y);
             X_Or_Y := 0;
          end if;
       end;
    end loop;
-   Ada.Text_IO.Close (File);
+   Close (File);
 
    Put("  "); --set up top label
 
