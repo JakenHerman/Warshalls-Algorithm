@@ -7,7 +7,8 @@ procedure Warshall is
    package Iio is new Integer_Io(Integer);
    use Iio;
    use dtio;
-
+   
+--10
    --Get_Size allows the txt file to specify how much space to allocate.
    function get_size return Integer  is
       Filename : String := "win25.txt";
@@ -17,7 +18,8 @@ procedure Warshall is
    begin
       Open(File => File,
                        Mode => In_File,
-                       Name => Filename);
+                       Name => Filename); --20
+
       while Line_Count /= 1 loop
          declare
             Line : String := Get_Line(File);
@@ -27,7 +29,7 @@ procedure Warshall is
          end;
       end loop;
       Close (File);
-      return ReturnSize;
+      return ReturnSize; --30
    end get_size;
 
    --Create variables  to set up file i/o
@@ -37,14 +39,19 @@ procedure Warshall is
    --Control x/y on file read
    X_Or_Y : Integer := 99;
 
+   --40 Create variables for X and Y to be set by user.
    --Create variables for X and Y to be set by user.
    User_X : Character;
    User_Y : Character;
    User_Size : Integer := get_size;
    T_X : Integer;
    T_Y : Integer;
+   Exists : Boolean := False;
+   Location_X, Location_Y : Integer;
+   Knt : Integer := 1;
 
-   --Integer Array needs conversion to generic type
+
+   -- 50 Integer Array needs conversion to generic type
    M : array (1 .. User_Size, 1 .. User_Size) of Integer := (others => (others => 0));
    T_array : array (1 .. User_Size) of Character;
 
@@ -54,6 +61,42 @@ procedure Warshall is
                     X : in     Character;
                     Y : in     Character) is
    begin
+      -- 60 does x exist?
+      for I in 1 .. User_Size loop
+         if Exists = True and I = User_Size then
+            Location_X := Knt; --set next location to value
+            T_Array(Knt) := X;
+         elsif T_Array(I) = X and Exists = False then
+            Exists := True;
+            Location_X := I;
+         elsif T_Array(I) = X and Exists = True then
+            return;
+         else
+            return;
+         end if;
+      end loop;
+
+      T_X := Location_X;
+      Exists := False;
+      
+      -- does x exist?
+      for I in 1 .. User_Size loop
+         if Exists = False  and I = User_Size then
+            Location_Y := Knt; --set next location to value
+            T_Array(Knt) := Y;
+         elsif T_Array(I) = Y and Exists = False then
+            Exists := True;
+            Location_Y := I;
+         elsif T_Array(I) = Y and Exists = True then
+            return;
+         else
+            return;
+         end if;
+      end loop;
+
+      T_Y := Location_Y;    
+      Exists := False;
+
       --does x exist?
       for i in 1 .. user_size loop
          for j in 1 .. user_size+1 loop
@@ -77,6 +120,7 @@ procedure Warshall is
          --if not, add to T_array, set location
          T_array(i) := Y;
       end loop;
+
 
       --This coordinate needs to be "1" because the node exists
       M(T_X, T_Y) := 1;
@@ -111,7 +155,7 @@ begin
 
    --Warshall's algorithm
    for I in 1..User_Size loop
-      Put(Integer'Image(I));
+      Put(T_Array(I));
       for J in 1..User_Size loop
          if M(J,I) > 0 then
             for K in 1..User_Size loop
@@ -124,7 +168,7 @@ begin
    --print the adjacency matrix.
    for I in 1..User_Size loop
       New_Line;
-      Put(Integer'Image(I)); Put(" ");
+      Put(T_Array(I)); Put(" ");
       for J in 1..User_Size loop
          if M(I,J) > 0 then
             Put("1 ");
