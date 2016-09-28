@@ -1,10 +1,12 @@
 --Written by Jaken Herman
 with Ada.Text_Io;
 use Ada.Text_Io;
+with Ada.Text_IO.Text_Streams;  use Ada.Text_IO.Text_Streams;
 with unchecked_conversion;
 with Ada.Unchecked_Deallocation;
 
 package body gwar is
+    subtype s3 is string (1..3);
 
    package Iio is new Integer_Io(Integer);
    use Iio;
@@ -13,7 +15,7 @@ package body gwar is
    
    --Get_Size allows the txt file to specify how much space to allocate.
    function get_size return Integer  is
-      Filename : String := "D_Option.txt";
+      --Filename : String := "D_Option.txt";
       File : File_Type;
       Line_Count : Integer := 0;
       ReturnSize : Integer;
@@ -34,21 +36,20 @@ package body gwar is
       return ReturnSize;
    end get_size;
 
-   Filename : String := "D_Option.txt";
+  -- Filename : String := "D_Option.txt";
    File : File_Type;
 
    X_Or_Y : Integer := 99;
 
-   User_X : Item;
-   User_Y : Item;
-   lx, ly : String := ""; --label variables
-   User_Size : Integer := get_size;
+   User_X : s3 := (others => ' ');
+   User_Y : s3 := (others => ' ');
+   User_Size : INTEGER := get_size;
    T_X, T_Y: Integer;
    Exists : Boolean := False;
    Knt : Integer := 1;
    M : array (1 .. User_Size, 1 .. User_Size) of Integer := (others => (others => 0));
    T_array : array (1 .. User_Size) of Item;
-   L_array : array (1 .. User_Size) of String(1..3) := (others => "   ");
+   L_array : array (1 .. User_Size) of s3 := (others => "   ");
 
    -- "First" allows the user to create edges between
    -- vertices.
@@ -88,8 +89,12 @@ package body gwar is
       end loop;
       Exists := False;
 
-      --This coordinate needs to be "1" because the node exists
-      M(T_X, T_Y) := 1;
+      if T_X = T_Y then
+        M(T_X, T_Y) := 0;
+      else
+        --This coordinate needs to be "1" because the node exists
+        M(T_X, T_Y) := 1;
+      end if;
    end;
 
 begin 
@@ -105,25 +110,26 @@ begin
             User_Size := Integer'Value(Line);
             X_Or_Y := 0;
          elsif X_Or_Y = 0 then
-            User_X := StringToItem(Line);
-            lx := Line;
-	        Put(Lx);
+            User_X := Line;
             X_Or_Y := 1;
          else
-            User_Y := StringToItem(Line);
-            ly := Line;
-            First(User_X, User_Y, lx, ly);
+            User_Y := Line;
+            First(StringToItem(User_X),
+            StringToItem(User_Y), User_X, User_Y);
             X_Or_Y := 0;
          end if;
       end;
    end loop;
    Close (File);
 
-   Put("  "); --set up top label
 
+   --print line before adjacency matrix
+   new_line;
+
+   Put("       "); --set up top label
    --Warshall's algorithm
    for I in 1..User_Size loop
-      Put(L_Array(I)); Put(" ");
+      Put(L_Array(I)); Put("   ");
       for J in 1..User_Size loop
          if M(J,I) > 0 then
             for K in 1..User_Size loop
@@ -136,13 +142,16 @@ begin
    --print the adjacency matrix.
    for I in 1..User_Size loop
       New_Line;
-      Put(L_Array(I)); Put(" ");
+      Put(L_Array(I)); Put("    ");
       for J in 1..User_Size loop
          if M(I,J) > 0 then
-            Put("1 ");
+            Put("1     ");
          else
-            Put("0 ");
+            Put("0     ");
          end if;
       end loop;
    end loop;
+   --print line after adjacency matrix
+   new_line;
 end gwar;
+
