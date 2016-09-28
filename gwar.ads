@@ -1,6 +1,10 @@
 GENERIC
-   TYPE Item IS PRIVATE; --type of array
-   size : integer := gwar.get_size; --size of array
+   TYPE Item IS PRIVATE; --type of array 
+   with procedure Put(X: Item);
    PACKAGE gwar IS
-    function get_size return integer;
+      function get_size return Integer;
+      procedure First (X : in Item;
+                       Y : in Item;
+                       lx : in String;
+                       ly : in String);
    END gwar;
