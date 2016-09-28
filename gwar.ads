@@ -1,5 +1,6 @@
 GENERIC
    TYPE Item IS PRIVATE; --type of array 
+   Filename : String;
    with procedure Put(X: Item);
    PACKAGE gwar IS
       function get_size return Integer;
