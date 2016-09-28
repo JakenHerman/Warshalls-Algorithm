@@ -33,5 +33,5 @@ procedure Gwarshall is
    package A_Option_Data is new Gwar(Integer, "a_Option.txt", Intput);
    use A_Option_Data;
 begin
-   declare
-   end Gwarshall;
+   null;
+end Gwarshall;
