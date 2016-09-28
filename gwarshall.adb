@@ -1,23 +1,37 @@
-with gwar;
+with Gwar;
 with Ada.Text_Io;
-procedure gwarshall is
+procedure Gwarshall is
 
-    subtype s3 is string (1..3);
-    subtype Character is string (1 .. 1);
-    package iio is new Ada.Text_IO.Integer_IO(Integer);
-    use iio;
- 
-procedure ChrPut(X : Character) is begin Ada.Text_Io.Put(x); end;
-procedure StrPut(X: s3) is 
-  begin    Ada.Text_IO.Put(X); end;
+   subtype S3 is String (1..3);
+   subtype Character is String (1 .. 1);
+   package Iio is new Ada.Text_Io.Integer_Io(Integer);
+   use Iio;
 
-  procedure IntPut(X: Integer) is
-  begin    iio.Put(X); end;
+   procedure Chrput (
+         X : Character) is
+   begin
+      Ada.Text_Io.Put(X);
+   end;
+   procedure Strput (
+         X : S3) is
+   begin
+      Ada.Text_Io.Put(X);
+   end;
 
-    package d_option_data is new gwar(Character, "d_Option.txt",  ChrPut);	use d_option_data;
-    package c_option_data is new gwar(Character, "c_Option.txt", ChrPut); use c_option_data;
-    package b_option_data is new gwar(s3, "b_Option.txt", StrPut); use b_option_data;
-    package a_option_data is new gwar(Integer, "a_Option.txt", IntPut); use a_option_data;
+   procedure Intput (
+         X : Integer) is
+   begin
+      Iio.Put(X);
+   end;
+
+   package D_Option_Data is new Gwar(Character, "d_Option.txt",  Chrput);
+   use D_Option_Data;
+   package C_Option_Data is new Gwar(Character, "c_Option.txt", Chrput);
+   use C_Option_Data;
+   package B_Option_Data is new Gwar(S3, "b_Option.txt", Strput);
+   use B_Option_Data;
+   package A_Option_Data is new Gwar(Integer, "a_Option.txt", Intput);
+   use A_Option_Data;
 begin
-    declare
-end gwarshall;
+   declare
+   end Gwarshall;
